@@ -1,0 +1,7 @@
+movie_db.settings:
+  path: '/admin/themoviedb/settings'
+  defaults:
+    _form: '\Drupal\movie_db\Form\MovieAPISettingsForm'
+    _title: 'The Movie DB Integration Settings'
+  requirements:
+    _role: 'administrator'

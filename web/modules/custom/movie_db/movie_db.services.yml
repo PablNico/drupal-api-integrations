@@ -1,0 +1,11 @@
+services:
+  logger.channel.movie_db:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments:
+      - 'movie_db'
+  movie_db.api_integration:
+    class: Drupal\movie_db\Services\MovieDBIntegration
+    arguments:
+      - '@config.factory'
+      - '@logger.channel.movie_db'
