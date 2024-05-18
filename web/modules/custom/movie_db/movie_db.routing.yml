@@ -1,5 +1,13 @@
+system.movie_db:
+  path: '/admin/movie_db'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Movie DB Menu'
+  requirements:
+    _role: 'administrator'
+
 movie_db.settings:
-  path: '/admin/themoviedb/settings'
+  path: '/admin/movie_db/settings'
   defaults:
     _form: '\Drupal\movie_db\Form\MovieAPISettingsForm'
     _title: 'The Movie DB Integration Settings'

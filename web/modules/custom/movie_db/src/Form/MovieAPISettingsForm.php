@@ -4,6 +4,7 @@ namespace Drupal\movie_db\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Render\Markup;
 
 class MovieAPISettingsForm extends ConfigFormBase{
 
@@ -50,17 +51,15 @@ class MovieAPISettingsForm extends ConfigFormBase{
     $form['credentials']['api_key'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Your API Key'),
-      '#placeholder' => 'Click here to change',
+      '#placeholder' =>  $this->t('Click here to change'),
       '#default_value' => $config->get('api_key'),
-      '#description' => "<a href='#'>Here<a/>",
     ];
 
     $form['credentials']['access_token'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Your Access Token'),
-      '#placeholder' => 'Click here to change',
+      '#placeholder' => $this->t('Click here to change'),
       '#default_value' => $config->get('access_token'),
-      '#description' => "<a href='#'>Here<a/>",
     ];
 
     $form['options'] = [
@@ -82,9 +81,9 @@ class MovieAPISettingsForm extends ConfigFormBase{
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $configFactory = $this->configFactory()->getEditable('movie_db.settings');
-    $config_keys = array_keys($configFactory->getRawData());
+    $config_keys = ['base_url', 'api_key', 'access_token', 'prefer_api_key'];
     foreach ($config_keys as $key) {
-      !empty($form_state->getValue($key)) ? $configFactory->set($key,$form_state->getValue($key))->save() : NULL;
+      empty($form_state->getValue($key)) ? NULL : $configFactory->set($key, $form_state->getValue($key))->save();
     }
     parent::submitForm($form, $form_state);
   }

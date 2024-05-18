@@ -1,0 +1,12 @@
+system.movie_db:
+  title: Movie DB Menu
+  parent: system.admin
+  route_name: system.movie_db
+  description: The Movie Database API Integration options
+  weight: 9
+movie_db.settings_menu:
+  title: API Settings
+  parent: system.movie_db
+  route_name: movie_db.settings
+  description: API Integration settings
+  weight: 9

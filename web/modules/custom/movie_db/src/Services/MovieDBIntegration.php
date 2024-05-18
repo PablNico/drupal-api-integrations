@@ -10,7 +10,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- *
+ * @file
+ * Implements the Integration with TheMovieDatabase. More info at: https://www.themoviedb.org/
  */
 class MovieDBIntegration {
 
@@ -113,13 +114,13 @@ class MovieDBIntegration {
     $parameters['query'] = $name;
     $parameters = array_reverse($parameters);
     $response = $this->getRequest('search/movie', $parameters);
-    return json_decode($response->getBody()->getContents());
+    return json_decode($response->getBody()->getContents(), true);
   }
 
-  public function trendMovies($time_window = 'day') {
-    $response = $this->getRequest("trending/movie/{$time_window}");
-    return json_decode($response->getBody()->getContents());
+  public function trending($time_window = 'day', $category = "all", $parameters = ['language' => 'en-US']) {
+    $parameters = array_reverse($parameters);
+    $response = $this->getRequest("trending/{$category}/{$time_window}", $parameters);
+    return json_decode($response->getBody()->getContents(), true);
   }
-
 
 }
