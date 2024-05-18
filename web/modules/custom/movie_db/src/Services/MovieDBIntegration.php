@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * @file
- * Implements the Integration with TheMovieDatabase. More info at: https://www.themoviedb.org/
+ * Implements the Integration with TheMovieDatabase. More info at: https://api.themoviedb.org/
  */
 class MovieDBIntegration {
 

@@ -83,7 +83,10 @@ class MovieAPISettingsForm extends ConfigFormBase{
     $configFactory = $this->configFactory()->getEditable('movie_db.settings');
     $config_keys = ['base_url', 'api_key', 'access_token', 'prefer_api_key'];
     foreach ($config_keys as $key) {
-      empty($form_state->getValue($key)) ? NULL : $configFactory->set($key, $form_state->getValue($key))->save();
+      $value = $form_state->getValue($key);
+      if (!empty($value)) {
+        $configFactory->set($key, $value)->save();
+      }
     }
     parent::submitForm($form, $form_state);
   }
