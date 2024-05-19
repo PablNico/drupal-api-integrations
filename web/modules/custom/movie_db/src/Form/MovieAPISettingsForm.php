@@ -52,14 +52,20 @@ class MovieAPISettingsForm extends ConfigFormBase{
       '#type' => 'textarea',
       '#title' => $this->t('Your API Key'),
       '#placeholder' =>  $this->t('Click here to change'),
-      '#default_value' => $config->get('api_key'),
+      '#default_value' => $config->get('api_key') ?? '',
+      '#description' => $this->t('You can get your API Key <a href=":url" target="_blank">here</a>', [
+          ':url' => 'https://developer.themoviedb.org/reference/intro/authentication']
+      ),
     ];
 
     $form['credentials']['access_token'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Your Access Token'),
       '#placeholder' => $this->t('Click here to change'),
-      '#default_value' => $config->get('access_token'),
+      '#default_value' => $config->get('access_token') ?? '',
+      '#description' => $this->t('You can get your Access Token <a href=":url" target="_blank">here</a>', [
+        ':url' => 'https://developer.themoviedb.org/reference/intro/authentication']
+      ),
     ];
 
     $form['options'] = [
