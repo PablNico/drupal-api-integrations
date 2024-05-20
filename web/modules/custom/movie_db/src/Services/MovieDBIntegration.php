@@ -94,13 +94,13 @@ class MovieDBIntegration {
    * @throws GuzzleException
    */
   private function getRequest(string $endpoint, array $parameters = []): ResponseInterface {
-    $query_param = '';
+    $query_param = '?';
     foreach ($parameters as $key => $value) {
-      $query_param .= "?{$key}={$value}&";
+      $query_param .= "{$key}={$value}&";
     }
     if ($this->movieSettings->get('prefer_api_key')) {
       $api_key = $this->movieSettings->get('api_key');
-      $query_param .= "?api_key={$api_key}";
+      $query_param .= "api_key={$api_key}";
     }
     return $this->apiClient->get($endpoint . $query_param);
   }
@@ -117,7 +117,9 @@ class MovieDBIntegration {
     return json_decode($response->getBody()->getContents(), true);
   }
 
-  public function trending($time_window = 'day', $category = "all", $parameters = ['language' => 'en-US']) {
+  public function trending($time_window = 'day', $category = "all",
+                           $parameters = ['language' => 'en-US', 'page' => 1]
+  ) {
     $parameters = array_reverse($parameters);
     $response = $this->getRequest("trending/{$category}/{$time_window}", $parameters);
     return json_decode($response->getBody()->getContents(), true);
