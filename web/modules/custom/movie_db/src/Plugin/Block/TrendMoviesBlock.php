@@ -69,9 +69,14 @@ class TrendMoviesBlock extends BlockBase implements ContainerFactoryPluginInterf
   public function build()  {
     $this->logger->info("test");
     $results = $this->apiClient->trending()['results'];
+    $i = random_int(0, count($results));
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('%content', ['%content' =>  $results[3]['original_name'] ??$results[3]['original_title']]),
+      '#markup' => $this->t('<h3>%content</h3><img src=":img-url">',
+        [
+          '%content' =>  $results[$i]['original_name'] ?? $results[$i]['original_title'],
+          ':img-url' => 'https://image.tmdb.org/t/p/original' . $results[$i]['poster_path']
+        ]),
       '#cache' => [
         'max-age' => 0,
       ]
