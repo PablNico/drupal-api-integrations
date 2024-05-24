@@ -9,6 +9,8 @@ namespace Drupal\movie_db\Form;
 
 use \Drupal\Core\Form\FormBase;
 use \Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MovieDBSearchForm extends FormBase {
 
@@ -17,7 +19,7 @@ class MovieDBSearchForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['categories'] = [
+    $form['category'] = [
       '#type' => 'radios',
       '#options' => [
         'all' =>  t('All'),
@@ -28,7 +30,7 @@ class MovieDBSearchForm extends FormBase {
       '#required' => TRUE,
     ];
 
-    $form['search'] = [
+    $form['query'] = [
       '#type' => 'textfield',
       '#placeholder' => 'Search something',
       '#required' => TRUE,
@@ -43,12 +45,11 @@ class MovieDBSearchForm extends FormBase {
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    return [
-      '#type' => 'markup',
-      '#markup' => '<h1>TESTE</h1>',
-      '#cache' => [
-        'max-age' => 0,
-      ]
-    ];
+    $category = $form_state->getValue('category');
+    $query = $form_state->getValue('query');
+
+    $path = Url::fromRoute('movie_db.search_page', ['category' => $category,'query' => $query])->toString();
+    $response = new RedirectResponse($path);
+    $response->send();
   }
 }
