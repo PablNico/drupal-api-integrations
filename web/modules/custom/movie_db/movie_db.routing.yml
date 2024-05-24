@@ -13,3 +13,11 @@ movie_db.settings:
     _title: 'The Movie DB Integration Settings'
   requirements:
     _role: 'administrator'
+
+movie_db.search_page:
+  path: '/tmdb/search_page/{category}/{query}'
+  defaults:
+    _controller: '\Drupal\movie_db\Controller\SearchController::search'
+  requirements:
+    _role: 'administrator'
+
