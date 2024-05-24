@@ -1,6 +1,5 @@
 name: TheMovieDB API Integration
 description: Provide the configuration and functions to integrate with TheMovieDB API
 package: Custom
-
 type: module
 core_version_requirement: ^9.4 || ^10
