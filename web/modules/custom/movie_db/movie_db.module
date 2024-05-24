@@ -1,1 +1,19 @@
 <?php
+
+function movie_db_theme() {
+  return [
+    'movie_db_search_results_template' => [
+      'variables' => [
+        'results' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function movie_db_preprocess_page(&$variables) {
+  // Attach CSS file to page output.
+  $variables['#attached']['library'][] = 'movie_db/movie_db.styles';
+}
