@@ -1,0 +1,4 @@
+movie_db.styles:
+  css:
+    theme:
+      css/grid_layout.css: {}
